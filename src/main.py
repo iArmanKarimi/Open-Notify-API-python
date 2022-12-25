@@ -12,18 +12,28 @@ URLS = MappingProxyType(
 
 class OpenNotify:
     @staticmethod
+    def __get(url):
+        with request.urlopen(url) as req:
+            return req.read().decode('utf-8')
+
+    @staticmethod
     def get_people_in_space():
-        pass
+        data = OpenNotify.__get(URLS['ASTROS'])
+        data = json.loads(data)
+        return data
 
     @staticmethod
     def get_ISS_location():
-        pass
+        data = OpenNotify.__get(URLS['ISS_NOW'])
+        data = json.loads(data)
+        return data
 
     @staticmethod
     async def get_people_in_space_async():
-        pass
+        return OpenNotify.get_people_in_space()
 
     @staticmethod
     async def get_ISS_location_async():
-        pass
+        return OpenNotify.get_ISS_location_async()
+
 
