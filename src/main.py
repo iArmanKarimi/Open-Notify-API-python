@@ -84,7 +84,6 @@ class OpenNotify:
 
     @staticmethod
     def get_ISS_location() -> ISSLocation:
-    def get_ISS_location() -> ISSLocation:
         data = OpenNotify.__get(URLS['ISS_NOW'])
         data = json.loads(data)
         unix = data['timestamp']
