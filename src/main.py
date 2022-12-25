@@ -47,10 +47,10 @@ class OpenNotify:
             return req.read().decode('utf-8')
 
     @staticmethod
-    def get_people_in_space():
+    def get_people_in_space() -> PeopleInSpace:
         data = OpenNotify.__get(URLS['ASTROS'])
         data = json.loads(data)
-        return data
+        return PeopleInSpace(data['number'], data['message'], data['people'])
 
     @staticmethod
     def get_ISS_location() -> ISSLocation:
