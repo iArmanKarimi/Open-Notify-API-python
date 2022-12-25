@@ -1,7 +1,10 @@
 import json
 from typing import List
+from typing import List
 from urllib import request
 from types import MappingProxyType
+from datetime import datetime
+from dataclasses import dataclass
 from datetime import datetime
 from dataclasses import dataclass
 
@@ -11,6 +14,33 @@ URLS = MappingProxyType(
         "ISS_NOW": "http://api.open-notify.org/iss-now.json",
     }
 )
+
+
+@dataclass
+class Location:
+    latitude: float
+    longitude: float
+
+
+@dataclass
+class ISSLocation:
+    message: str
+    date_time: datetime
+    utc_date_time: datetime
+    location: Location
+
+
+@dataclass
+class People:
+    name: str
+    craft: str
+
+
+@dataclass
+class PeopleInSpace:
+    number: int
+    message: str
+    people: List[People]
 
 
 @dataclass
@@ -53,6 +83,7 @@ class OpenNotify:
         return PeopleInSpace(data['number'], data['message'], data['people'])
 
     @staticmethod
+    def get_ISS_location() -> ISSLocation:
     def get_ISS_location() -> ISSLocation:
         data = OpenNotify.__get(URLS['ISS_NOW'])
         data = json.loads(data)
