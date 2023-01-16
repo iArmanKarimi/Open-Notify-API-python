@@ -14,14 +14,27 @@ For other languages, see [Open Notify API clients](https://github.com/iArmanKari
 
 ## Examples
 
+Create an instance of OpenNotify:
+
+```python
+open_notify = OpenNotify()
+```
+
 Number of People in Space:
 
 ```python
+iss_location = open_notify.get_ISS_location()
+print("ISS location:")
+print("latitude:", iss_location.location.latitude)
+print("longitude:", iss_location.location.longitude)
 ```
 
 Current Location of the International Space Station:
 
 ```python
+people_in_space = open_notify.get_people_in_space()
+for people in people_in_space.people:
+    print(f"craft: {people.craft}, name: {people.name}")
 ```
 
 ## References
